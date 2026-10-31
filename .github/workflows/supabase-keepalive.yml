@@ -1,0 +1,21 @@
+# กัน Supabase (แพ็กเกจฟรี) หยุดโปรเจกต์ — เรียกฐานข้อมูลอัตโนมัติทุก 3 วัน เวลา 06:00 น. (ไทย)
+# อ่าน SUPABASE_URL และ SUPABASE_KEY จากไฟล์ config.js เอง ไม่ต้องตั้งค่าเพิ่ม
+name: Supabase keepalive
+on:
+  schedule:
+    - cron: '0 23 */3 * *'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ping Supabase
+        run: |
+          URL=$(grep -oP "SUPABASE_URL\s*=\s*'\K[^']*" config.js | head -1 | sed 's:/*$::')
+          KEY=$(grep -oP "SUPABASE_KEY\s*=\s*'\K[^']*" config.js | head -1)
+          if [ -z "$URL" ] || [ -z "$KEY" ]; then echo "ยังไม่ได้ใส่ SUPABASE_URL / SUPABASE_KEY ใน config.js"; exit 1; fi
+          curl -sS --fail-with-body -X POST "$URL/rest/v1/rpc/keepalive" \
+            -H "apikey: $KEY" -H "Content-Type: application/json" -d '{}'
+          echo ""
+          echo "ping สำเร็จ"

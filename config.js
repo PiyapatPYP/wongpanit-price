@@ -1,3 +1,8 @@
+// ฐานข้อมูล Supabase (Project Settings → API) ใส่ระหว่างเครื่องหมาย ' '
+// ถ้าใส่ทั้ง 2 ค่า ระบบจะใช้ Supabase แทน Google Sheets
+window.SUPABASE_URL = 'https://grzxrntfnahejfcljxgt.supabase.co';
+window.SUPABASE_KEY = 'sb_publishable_6u5Q7zhfNjAgSreQNjW-yA_6Jb_R-jO';
+
 // ใส่ลิงก์ Web app ของ Google Apps Script ระหว่างเครื่องหมาย ' '
 // ตัวอย่าง: window.PRICE_API_URL = 'https://script.google.com/macros/s/xxxxxxxx/exec';
 window.PRICE_API_URL = 'https://script.google.com/macros/s/AKfycbyyXOx0mmQgLa5Dbu925gu6Px7RPB_JKZ7TKqVQqCBM5-tXz2JLyeKZYB6l52n2uw9P/exec';
